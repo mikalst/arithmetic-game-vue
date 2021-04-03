@@ -14,7 +14,7 @@ export default {
   },
   methods: {
     start: function() {
-      this.remainingSeconds = 30;
+      this.remainingSeconds = 60;
       var timer = setInterval((context) => {
         context.remainingSeconds--;
         if (context.remainingSeconds === 0) {

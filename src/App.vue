@@ -55,10 +55,28 @@ export default {
       }
     },
     setNewProblem: function() {
-      this.numA = Math.ceil(Math.random()*10);
-      this.numB = Math.ceil(Math.random()*10);
-      this.problem = `${this.numA} x ${this.numB}:`;
-      this.solution = this.numA * this.numB;
+      let operation = Math.floor(Math.random()*4);
+      this.numB = Math.ceil(Math.random()*100);
+      if (operation == 0){
+        this.numA = Math.ceil(Math.random()*100);
+        this.problem = `${this.numA} + ${this.numB}:`;
+        this.solution = this.numA + this.numB;
+      }
+      else if (operation == 1){
+        this.numA = Math.ceil(Math.random()*100);
+        this.problem = `${this.numA + this.numB} - ${this.numB}:`;
+        this.solution = this.numA;
+      }
+      else if (operation == 2){
+        this.numA = Math.ceil(Math.random()*12);
+        this.problem = `${this.numA} * ${this.numB}:`;
+        this.solution = this.numA * this.numB;
+      }
+      else if (operation == 3){
+        this.numA = Math.ceil(Math.random()*12);
+        this.problem = `${this.numA * this.numB} / ${this.numB}:`;
+        this.solution = this.numA;
+      }
       this.$refs.input.resetInput();
     },
     stop: function() {
