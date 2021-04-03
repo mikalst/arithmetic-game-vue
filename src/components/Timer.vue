@@ -9,16 +9,18 @@ export default {
   name: 'Input',
   data: function () {
     return {
-      remainingSeconds: 5
+      remainingSeconds: null,
+      timer: null
     }
   },
   methods: {
     start: function() {
+      clearInterval(this.timer);
       this.remainingSeconds = 60;
-      var timer = setInterval((context) => {
+      this.timer = setInterval((context) => {
         context.remainingSeconds--;
         if (context.remainingSeconds === 0) {
-          clearInterval(timer);
+          clearInterval(this.timer);
           this.$emit('activeEnded');
         }
       }, 1000, this);

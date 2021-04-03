@@ -13,8 +13,8 @@
     @activeEnded="stop"
     :remainingSeconds="remainingSeconds"
   />
-    <button v-on:click="start()">
-      Start
+    <button class="button" v-on:click="start()">
+      <span>Start</span>
     </button>
 </template>
 
@@ -34,7 +34,7 @@ export default {
     return {
       numA: 0,
       numB: 0,
-      problem: 0,
+      problem: null,
       answer: 0,
       solution: 1337,
       correct: 0,
@@ -56,31 +56,32 @@ export default {
     },
     setNewProblem: function() {
       let operation = Math.floor(Math.random()*4);
-      this.numB = Math.ceil(Math.random()*100);
+      console.log(operation);
+      this.numB = 1+Math.ceil(Math.random()*100);
       if (operation == 0){
-        this.numA = Math.ceil(Math.random()*100);
+        this.numA = 1+Math.ceil(Math.random()*100);
         this.problem = `${this.numA} + ${this.numB}:`;
         this.solution = this.numA + this.numB;
       }
       else if (operation == 1){
-        this.numA = Math.ceil(Math.random()*100);
+        this.numA = 1+Math.ceil(Math.random()*100);
         this.problem = `${this.numA + this.numB} - ${this.numB}:`;
         this.solution = this.numA;
       }
       else if (operation == 2){
-        this.numA = Math.ceil(Math.random()*12);
-        this.problem = `${this.numA} * ${this.numB}:`;
+        this.numA = 1+Math.ceil(Math.random()*12);
+        this.problem = `${this.numA} x ${this.numB}:`;
         this.solution = this.numA * this.numB;
       }
       else if (operation == 3){
-        this.numA = Math.ceil(Math.random()*12);
-        this.problem = `${this.numA * this.numB} / ${this.numB}:`;
-        this.solution = this.numA;
+        this.numA = 1+Math.ceil(Math.random()*12);
+        this.problem = `${this.numA * this.numB} / ${this.numA}:`;
+        this.solution = this.numB;
       }
       this.$refs.input.resetInput();
     },
     stop: function() {
-      this.$refs.input.setInputFieldDisabled();
+      this.$refs.input?.setInputFieldDisabled();
       console.log("Game is over.");
     },
     start: function() {
@@ -91,7 +92,6 @@ export default {
     }
   },
   mounted: function () {
-    this.setNewProblem();
   }
 }
 </script>
@@ -104,5 +104,45 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+
+.button {
+  display: inline-block;
+  border-radius: 4px;
+  background-color: #00e16e;
+  border: none;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: calc(2vw + 2vh + 1vmin);
+  padding: 2px;
+  width: 25%;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px;
+}
+
+.button span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.button span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.button:hover span {
+  padding-right: 25px;
+}
+
+.button:hover span:after {
+  opacity: 1;
+  right: 0;
 }
 </style>
