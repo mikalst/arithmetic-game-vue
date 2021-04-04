@@ -80,18 +80,35 @@ export default {
       }
       this.$refs.input.resetInput();
     },
-    stop: function() {
+    stop: async function() {
       this.$refs.input?.setInputFieldDisabled();
       console.log("Game is over.");
+      await this.saveScore();
     },
-    start: function() {
+    start: async function() {
       console.log("Game is starting.");
       this.$refs.timer.start();
       this.$refs.input.setInputFieldActive();
       this.setNewProblem();
+      await this.fetchScore();
+    },
+    saveScore: async function() {
+      console.log("Saving score...");
+      const res = await fetch(
+        process.env.VUE_APP_API_PATH+
+        `postStatistics?person=mikal&result=${this.correct}`,
+        { method: 'POST' });
+      console.log(res.status);
+      console.log("Saved.");
+    },
+    fetchScore: async function() {
+      console.log("Fetching score.");
+      const res = await fetch(
+        process.env.VUE_APP_API_PATH+"getStatistics?person=mikal");
+      console.log(await res.json());
     }
   },
-  mounted: function () {
+  mounted: function () { 
   }
 }
 </script>
