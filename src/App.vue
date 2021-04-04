@@ -1,4 +1,11 @@
 <template>
+  <input 
+        ref="inputName"
+        type="text"
+        id="personId"
+        v-bind="personId"
+        placeholder="Your name..."
+      >
   <Input 
     ref="input"
     v-model="answer"
@@ -39,7 +46,8 @@ export default {
       solution: 1337,
       correct: 0,
       remainingSeconds: 5,
-      inputDisabled: true
+      inputDisabled: true,
+      personId: null
     }
   },
   methods: {
@@ -96,7 +104,7 @@ export default {
       console.log("Saving score...");
       const res = await fetch(
         process.env.VUE_APP_API_PATH+
-        `postStatistics?person=mikal&result=${this.correct}`,
+        `postStatistics?person=${this.personId}&result=${this.correct}`,
         { method: 'POST' });
       console.log(res.status);
       console.log("Saved.");
@@ -104,7 +112,7 @@ export default {
     fetchScore: async function() {
       console.log("Fetching score.");
       const res = await fetch(
-        process.env.VUE_APP_API_PATH+"getStatistics?person=mikal");
+        process.env.VUE_APP_API_PATH+`getStatistics?person=${this.personId}`);
       console.log(await res.json());
     }
   },
