@@ -16,7 +16,7 @@ export default {
   methods: {
     start: function() {
       clearInterval(this.timer);
-      this.remainingSeconds = 5;
+      this.remainingSeconds = 60;
       this.timer = setInterval((context) => {
         context.remainingSeconds--;
         if (context.remainingSeconds === 0) {

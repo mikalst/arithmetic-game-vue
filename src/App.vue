@@ -3,7 +3,7 @@
         ref="inputName"
         type="text"
         id="personId"
-        v-bind="personId"
+        v-model="this.personId"
         placeholder="Your name..."
       >
   <Input 
@@ -23,19 +23,23 @@
     <button class="button" v-on:click="start()">
       <span>Start</span>
     </button>
+  <Table v-show="stats" :stats="stats" />
 </template>
 
 <script>
 import Input from './components/Input.vue'
 import Counter from './components/Counter.vue'
+import Table from './components/Table.vue'
 import Timer from './components/Timer.vue'
+
 
 export default {
   name: 'App',
   components: {
     Counter,
     Input,
-    Timer
+    Timer,
+    Table
   },
   data: function() {
     return {
@@ -45,9 +49,10 @@ export default {
       answer: 0,
       solution: 1337,
       correct: 0,
-      remainingSeconds: 5,
+      remainingSeconds: null,
       inputDisabled: true,
-      personId: null
+      personId: null,
+      stats: []
     }
   },
   methods: {
@@ -91,17 +96,19 @@ export default {
     stop: async function() {
       this.$refs.input?.setInputFieldDisabled();
       console.log("Game is over.");
-      await this.saveScore();
+      if (this.personId) {
+        await this.saveScore();
+        await this.fetchScore();
+      }
     },
     start: async function() {
       console.log("Game is starting.");
       this.$refs.timer.start();
       this.$refs.input.setInputFieldActive();
       this.setNewProblem();
-      await this.fetchScore();
     },
     saveScore: async function() {
-      console.log("Saving score...");
+      console.log(`Saving score... for ${this.personId}`);
       const res = await fetch(
         process.env.VUE_APP_API_PATH+
         `postStatistics?person=${this.personId}&result=${this.correct}`,
@@ -110,10 +117,12 @@ export default {
       console.log("Saved.");
     },
     fetchScore: async function() {
-      console.log("Fetching score.");
+      console.log(`Fetching score for ${this.personId} ...`);
       const res = await fetch(
         process.env.VUE_APP_API_PATH+`getStatistics?person=${this.personId}`);
-      console.log(await res.json());
+      let json = await res.json();
+      this.stats = json;
+      console.log(json);
     }
   },
   mounted: function () { 

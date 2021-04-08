@@ -1,0 +1,25 @@
+<template>
+<div>
+  <h2>Your recent scores</h2>
+    <table style="margin:auto">
+    <tr>
+    <th>Date</th>
+    <th>Score</th>
+    </tr>
+  <TableElement v-for="row in stats" :key="row.RowKey" :dataRow="row"
+  />
+  </table>
+</div>
+</template>
+
+<script>
+import TableElement from './TableElement'
+
+export default {
+  name: 'Table',
+  components: {
+    TableElement
+  },
+  props: ['stats']
+}
+</script>

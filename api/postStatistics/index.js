@@ -11,6 +11,7 @@ module.exports = async function (context, req) {
         let personId = (req.query.person) || (req.body.person);
         let input = {
             RowKey: `${personId}.${(new Date()).getTime()}`,
+            Timestamp: `${(new Date()).getTime()}`,
             PersonId: personId,
             PartitionKey: "norway",
             Result: req.query.result

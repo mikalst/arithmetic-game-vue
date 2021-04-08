@@ -5,9 +5,10 @@
         ref="inputField"
         type="number"
         id="fname"
+        class="input"
         v-bind="value"
         v-on:keyup="updateValue($event.target.value)"
-        placeholder="Ditt svar..."
+        placeholder="Your answer..."
         :disabled="inputDisabled"
       >
   </div>
@@ -46,4 +47,8 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.input{
+  text-align:center;
+  font-size: calc(1vw + 1vh + 0.5vmin);
+}
 </style>

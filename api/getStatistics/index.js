@@ -11,8 +11,13 @@ module.exports = async function (context, req) {
         let personId = (req.query.person) || (req.body.person);
         try{         
             let promise = new Promise(function(resolve, reject) {
+                // Filter out rows more than 30 days old.
+                let comparisonDate = new Date();
+                comparisonDate.setDate(comparisonDate.getDate() - 30);
                 var query = new azure.TableQuery()
-                    .where(`PersonId eq ?`, personId);
+                    .where('PersonId eq ?', personId)
+                    .and('Timestamp ge ?', comparisonDate);
+                
                 tableSvc.queryEntities(
                     tableName, 
                     query,
@@ -23,6 +28,8 @@ module.exports = async function (context, req) {
                         context.res = {
                             status: 200,
                             body: result.entries
+                                .sort(row => -1*row['Timestamp']['_'])
+                                .slice(0, 5)
                         };
                         resolve();
                     }
@@ -37,6 +44,7 @@ module.exports = async function (context, req) {
             await promise;
         }
         catch (exception) {
+            console.log(exception);
             context.res = {
                 status: 500
             };
