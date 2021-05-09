@@ -1,6 +1,6 @@
 <template>
   <button class="button" v-on:click="onClick"> 
-    <span>Start</span>
+    <h2><span>Start</span></h2>
   </button>
 </template>
 
@@ -21,16 +21,16 @@ export default {
 <style scoped>
 .button {
   display: inline-block;
-  border-radius: 4px;
+  border-radius: 5px;
   background-color: #00e16e;
   border: none;
   color: #FFFFFF;
   text-align: center;
   padding: 2px;
-  width: 25%;
+  width: calc(20vw + 10vmin);
   transition: all 0.5s;
   cursor: pointer;
-  margin: 5px;
+  margin: 2px;
 }
 
 .button span {
