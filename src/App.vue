@@ -1,34 +1,41 @@
-<template>
-  <input 
-        ref="inputName"
-        type="text"
-        id="personId"
-        v-model="this.personId"
-        placeholder="Your name..."
-      >
-  <Input 
-    ref="input"
+<template class="app">
+  <InputText 
+        ref="inputIdentifier"
+        v-model="personId"
+      />
+  <div>
+    <Problem
+      ref="problem" />
+  </div>
+  <InputNumber 
+    ref="inputAnswer"
     v-model="answer"
-    :problem="problem"
     :solution="solution"
     :inputDisabled="inputDisabled"
-    @answerUpdated="checkAnswer" />
-  <Counter
-    :correct="correct"/>
+    @inputUpdated="checkAnswer" />
+  <div>
+    <Counter
+      :correct="correct"/>
+  </div>
   <Timer
     ref="timer"
     @activeEnded="stop"
     :remainingSeconds="remainingSeconds"
   />
-    <button class="button" v-on:click="start()">
-      <span>Start</span>
-    </button>
-  <Table v-show="stats" :stats="stats" />
+  <div>
+    <StartButton @clicked="start" />
+  </div>
+  <Table class="pTable" :title="'Your recent scores'" v-show="mostRecentStats" :stats="mostRecentStats" />
+  <HighscoreTable class="hsTable" :title="'Top scores today'" v-show="topStatsToday" :stats="topStatsToday" />
 </template>
 
 <script>
-import Input from './components/Input.vue'
+import InputNumber from './components/InputNumber.vue'
+import InputText from './components/InputText.vue'
+import HighscoreTable from './components/HighscoreTable.vue'
 import Counter from './components/Counter.vue'
+import Problem from './components/Problem.vue'
+import StartButton from './components/StartButton.vue'
 import Table from './components/Table.vue'
 import Timer from './components/Timer.vue'
 
@@ -37,22 +44,24 @@ export default {
   name: 'App',
   components: {
     Counter,
-    Input,
+    HighscoreTable,
+    InputNumber,
+    InputText,
+    Problem,
+    StartButton,
     Timer,
     Table
   },
   data: function() {
     return {
-      numA: 0,
-      numB: 0,
-      problem: null,
       answer: 0,
       solution: 1337,
       correct: 0,
       remainingSeconds: null,
       inputDisabled: true,
       personId: null,
-      stats: []
+      mostRecentStats: [],
+      topStatsToday: []
     }
   },
   methods: {
@@ -68,43 +77,23 @@ export default {
       }
     },
     setNewProblem: function() {
-      let operation = Math.floor(Math.random()*4);
-      console.log(operation);
-      this.numB = 1+Math.ceil(Math.random()*100);
-      if (operation == 0){
-        this.numA = 1+Math.ceil(Math.random()*100);
-        this.problem = `${this.numA} + ${this.numB}:`;
-        this.solution = this.numA + this.numB;
-      }
-      else if (operation == 1){
-        this.numA = 1+Math.ceil(Math.random()*100);
-        this.problem = `${this.numA + this.numB} - ${this.numB}:`;
-        this.solution = this.numA;
-      }
-      else if (operation == 2){
-        this.numA = 1+Math.ceil(Math.random()*12);
-        this.problem = `${this.numA} x ${this.numB}:`;
-        this.solution = this.numA * this.numB;
-      }
-      else if (operation == 3){
-        this.numA = 1+Math.ceil(Math.random()*12);
-        this.problem = `${this.numA * this.numB} / ${this.numA}:`;
-        this.solution = this.numB;
-      }
-      this.$refs.input.resetInput();
+      this.solution = this.$refs.problem?.setNewProblem();
+      this.$refs.inputAnswer.resetInput();
     },
     stop: async function() {
-      this.$refs.input?.setInputFieldDisabled();
+      this.$refs.inputAnswer?.setInputFieldDisabled();
       console.log("Game is over.");
       if (this.personId) {
         await this.saveScore();
         await this.fetchScore();
+        await this.fetchTodaysHighcore();
       }
     },
     start: async function() {
       console.log("Game is starting.");
+      this.correct = 0;
       this.$refs.timer.start();
-      this.$refs.input.setInputFieldActive();
+      this.$refs.inputAnswer?.setInputFieldActive();
       this.setNewProblem();
     },
     saveScore: async function() {
@@ -121,7 +110,15 @@ export default {
       const res = await fetch(
         process.env.VUE_APP_API_PATH+`getStatistics?person=${this.personId}`);
       let json = await res.json();
-      this.stats = json;
+      this.mostRecentStats = json;
+      console.log(json);
+    },
+    fetchTodaysHighcore: async function() {
+      console.log(`Fetching highscores for today ...`);
+      const res = await fetch(
+        process.env.VUE_APP_API_PATH+`getHighscore`);
+      let json = await res.json();
+      this.topStatsToday = json;
       console.log(json);
     }
   },
@@ -138,45 +135,17 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+  font-size: calc(0.5vw + 0.5vh + 1vmin);
 }
 
-.button {
-  display: inline-block;
-  border-radius: 4px;
-  background-color: #00e16e;
-  border: none;
-  color: #FFFFFF;
-  text-align: center;
-  font-size: calc(2vw + 2vh + 1vmin);
-  padding: 2px;
-  width: 25%;
-  transition: all 0.5s;
-  cursor: pointer;
-  margin: 5px;
+.pTable {
+  width: 50%;
+  float: left
+}
+.hsTable {
+  width: 50%;
+  float: right
 }
 
-.button span {
-  cursor: pointer;
-  display: inline-block;
-  position: relative;
-  transition: 0.5s;
-}
 
-.button span:after {
-  content: '\00bb';
-  position: absolute;
-  opacity: 0;
-  top: 0;
-  right: -20px;
-  transition: 0.5s;
-}
-
-.button:hover span {
-  padding-right: 25px;
-}
-
-.button:hover span:after {
-  opacity: 1;
-  right: 0;
-}
 </style>

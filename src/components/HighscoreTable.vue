@@ -6,19 +6,19 @@
     <th>Date</th>
     <th>Score</th>
     </tr>
-  <TableElement v-for="row in stats" :key="row.RowKey" :dataRow="row"
+  <HighscoreTableElement v-for="row in stats" :key="row.RowKey" :dataRow="row"
   />
   </table>
 </div>
 </template>
 
 <script>
-import TableElement from './TableElement'
+import HighscoreTableElement from './HighscoreTableElement'
 
 export default {
-  name: 'Table',
+  name: 'HighscoreTable',
   components: {
-    TableElement
+    HighscoreTableElement
   },
   props: ['stats', 'title']
 }

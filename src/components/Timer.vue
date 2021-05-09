@@ -6,13 +6,14 @@
 
 <script>
 export default {
-  name: 'Input',
+  name: 'Timer',
   data: function () {
     return {
       remainingSeconds: null,
       timer: null
     }
   },
+  emits: ['activeEnded'],
   methods: {
     start: function() {
       clearInterval(this.timer);

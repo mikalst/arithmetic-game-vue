@@ -1,12 +1,10 @@
 <template>
-  <div class="counter">
-    <h1>Correct: {{ correct }}</h1>
-  </div>
+    <h1> Correct: {{ correct }} </h1>
 </template>
 
 <script>
 export default {
-  name: 'Input',
+  name: 'Counter',
   props: ['correct']
 }
 </script>

@@ -1,33 +1,31 @@
 <template>
-  <div class="hello">
-    <h1>Solve {{ problem }}</h1>
       <input 
         ref="inputField"
         type="number"
-        id="fname"
+        id="ftext"
         class="input"
         v-bind="value"
         v-on:keyup="updateValue($event.target.value)"
         placeholder="Your answer..."
         :disabled="inputDisabled"
       >
-  </div>
 </template>
 
 <script>
 import { nextTick } from 'vue'
 
 export default {
-  name: 'Input',
-  props: ['value', 'problem'],
+  name: 'InputNumber',
+  props: ['value'],
   data: function () {
     return {
       inputDisabled: true
     }
   },
+  emits: ['inputUpdated'],
   methods: {
     updateValue: function (value) {
-      this.$emit('answerUpdated', value);
+      this.$emit('inputUpdated', value);
     },
     resetInput: function () {
       this.$refs.inputField.value="";
@@ -48,7 +46,6 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .input{
-  text-align:center;
-  font-size: calc(1vw + 1vh + 0.5vmin);
+  text-align: center;
 }
 </style>

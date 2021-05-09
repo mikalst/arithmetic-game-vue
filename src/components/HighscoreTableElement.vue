@@ -1,6 +1,9 @@
 <template>
   <tr>
     <td>
+      {{ dataRow.PersonId['_'] }}
+    </td>
+    <td>
       {{ date.getDate() + '/' + date.getMonth() }}
     </td>
     <td>
@@ -11,7 +14,7 @@
 
 <script>
 export default {
-  name: 'TableElement',
+  name: 'HighscoreTableElement',
   props: ['dataRow'],
   computed: {
     date: function () {
