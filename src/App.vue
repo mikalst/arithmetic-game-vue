@@ -25,8 +25,12 @@
   <div>
     <StartButton @clicked="start" />
   </div>
-  <Table class="pTable" :title="'Your recent scores'" v-show="mostRecentStats" :stats="mostRecentStats" />
-  <HighscoreTable class="hsTable" :title="'Top scores today'" v-show="topStatsToday" :stats="topStatsToday" />
+  <div class="pTable">
+    <Table :title="'Your recent scores'" v-show="mostRecentStats" :stats="mostRecentStats" />
+  </div>
+  <div class="hsTable">
+    <HighscoreTable :title="'Top scores today'" v-show="topStatsToday" :stats="topStatsToday" />
+  </div>
 </template>
 
 <script>
@@ -139,12 +143,14 @@ export default {
 }
 
 .pTable {
-  width: 50%;
-  float: left
+  position: absolute;
+  width: 25%;
+  left: 25%;
 }
 .hsTable {
-  width: 50%;
-  float: right
+  position: absolute;
+  width: 25%;
+  left: 50%;
 }
 
 
