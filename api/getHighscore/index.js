@@ -26,7 +26,7 @@ module.exports = async function (context, req) {
                     context.res = {
                         status: 200,
                         body: result.entries
-                            .sort(row => -row['Result']['_'])
+                            .sort((a, b) => -1*parseInt(a['Result']['_']) + parseInt(b['Result']['_']))
                             .slice(0, 5)
                     };
                     resolve();
