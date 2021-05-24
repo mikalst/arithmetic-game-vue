@@ -1,8 +1,11 @@
 <template class="app">
-  <InputText 
+  <div>
+    <InputText 
         ref="inputIdentifier"
         v-model="personId"
-      />
+    />
+  </div>
+
   <div>
     <Problem
       ref="problem" />
@@ -131,6 +134,7 @@ export default {
 }
 </script>
 
+
 <style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
@@ -138,20 +142,20 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
-  font-size: calc(0.5vw + 0.5vh + 1vmin);
+  margin-top: 5vh;
+  font-size: calc(1vw + 1vh + 1vmin);
 }
 
 .pTable {
   position: absolute;
   width: 25%;
   left: 25%;
+  padding-top: 5vh;
 }
 .hsTable {
   position: absolute;
   width: 25%;
   left: 50%;
+  padding-top: 5vh;
 }
-
-
 </style>

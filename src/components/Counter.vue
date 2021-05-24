@@ -1,5 +1,5 @@
 <template>
-    <h1> Correct: {{ correct }} </h1>
+    Correct: {{ correct }}
 </template>
 
 <script>

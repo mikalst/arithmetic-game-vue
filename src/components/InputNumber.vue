@@ -47,5 +47,8 @@ export default {
 <style scoped>
 .input{
   text-align: center;
+  width: calc(20vw + 10vmin);
+  height: calc(1.5vh + 1vmin);
+  font-size: calc(0.5vw + 1vh + 1vmin);
 }
 </style>

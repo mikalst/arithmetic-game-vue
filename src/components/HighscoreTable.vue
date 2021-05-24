@@ -1,6 +1,6 @@
 <template>
 <div>
-  <h2>{{ title }}</h2>
+  {{ title }}
     <table style="margin:auto">
     <tr>
     <th>Date</th>

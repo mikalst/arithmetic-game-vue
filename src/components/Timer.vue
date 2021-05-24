@@ -1,6 +1,6 @@
 <template>
   <div class="timer">
-    <h1>Remaining: {{ remainingSeconds }}</h1>
+    Remaining: {{ remainingSeconds }}
   </div>
 </template>
 

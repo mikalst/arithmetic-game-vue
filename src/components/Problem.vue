@@ -1,5 +1,5 @@
 <template>
-    <h1> Solve: {{ problem }} </h1>
+    <div> Solve: {{ problem }} </div>
 </template>
 
 <script>
