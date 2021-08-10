@@ -1,5 +1,5 @@
 <template>
-    <div> Solve: {{ problem }} </div>
+    <div class="base"> Solve: {{ problem }} </div>
 </template>
 
 <script>
@@ -43,4 +43,12 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.base{
+  font-size: calc(2vw + 1vh + 1vmin);
+}
+@media (max-width: 600px) {
+  .base{
+    font-size: calc(2vw + 1vh + 1vmin);
+  }
+}
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <button class="button" v-on:click="onClick"> 
+  <button class="button input" v-on:click="onClick"> 
     <span>Start</span>
   </button>
 </template>
@@ -56,5 +56,19 @@ export default {
 .button:hover span:after {
   opacity: 1;
   right: 0;
+}
+
+.input{
+  text-align: center;
+  width: 50vw;
+  height: calc(5vh + 1vmin);
+  font-size: calc(2vw + 1vh + 1vmin);
+}
+@media (max-width: 600px) {
+  .input{
+    width: 90vw;
+    height: calc(6vh + 1vmin);
+    font-size: calc(2vw + 1vh + 1vmin);
+  }
 }
 </style>

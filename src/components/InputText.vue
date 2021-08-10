@@ -3,7 +3,7 @@
         ref="inputField"
         type="text"
         id="ftext"
-        class="input"
+        class="base"
         v-model="value"
         placeholder="Your name..."
         :disabled="inputDisabled"
@@ -44,10 +44,15 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.input{
+.base{
   text-align: center;
-  width: calc(20vw + 10vmin);
-  height: calc(1.5vh + 1vmin);
-  font-size: calc(0.5vw + 1vh + 1vmin);
+  width: 50vw;
+  height: calc(5vh + 1vmin);
+}
+@media (max-width: 600px) {
+  .base{
+    width: 90vw;
+    height: calc(6vh + 1vmin);
+  }
 }
 </style>

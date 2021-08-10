@@ -146,6 +146,15 @@ export default {
   font-size: calc(1vw + 1vh + 1vmin);
 }
 
+@media (max-width: 600px) {
+  #app{
+    font-size: calc(2vw + 1vh + 1vmin);
+  }
+  input{
+    font-size: calc(2vw + 1vh + 1vmin);
+  }
+}
+
 .pTable {
   position: absolute;
   width: 25%;
