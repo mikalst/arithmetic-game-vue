@@ -31,15 +31,11 @@
   <div class="pTable">
     <Table :title="'Your recent scores'" v-show="mostRecentStats" :stats="mostRecentStats" />
   </div>
-  <div class="hsTable">
-    <HighscoreTable :title="'Top scores today'" v-show="topStatsToday" :stats="topStatsToday" />
-  </div>
 </template>
 
 <script>
 import InputNumber from './components/InputNumber.vue'
 import InputText from './components/InputText.vue'
-import HighscoreTable from './components/HighscoreTable.vue'
 import Counter from './components/Counter.vue'
 import Problem from './components/Problem.vue'
 import StartButton from './components/StartButton.vue'
@@ -51,7 +47,6 @@ export default {
   name: 'App',
   components: {
     Counter,
-    HighscoreTable,
     InputNumber,
     InputText,
     Problem,
@@ -93,7 +88,6 @@ export default {
       if (this.personId) {
         await this.saveScore();
         await this.fetchScore();
-        await this.fetchTodaysHighcore();
       }
     },
     start: async function() {
@@ -118,14 +112,6 @@ export default {
         process.env.VUE_APP_API_PATH+`getStatistics?person=${this.personId}`);
       let json = await res.json();
       this.mostRecentStats = json;
-      console.log(json);
-    },
-    fetchTodaysHighcore: async function() {
-      console.log(`Fetching highscores for today ...`);
-      const res = await fetch(
-        process.env.VUE_APP_API_PATH+`getHighscore`);
-      let json = await res.json();
-      this.topStatsToday = json;
       console.log(json);
     }
   },
@@ -157,14 +143,8 @@ export default {
 
 .pTable {
   position: absolute;
-  width: 25%;
+  width: 50%;
   left: 25%;
-  padding-top: 5vh;
-}
-.hsTable {
-  position: absolute;
-  width: 25%;
-  left: 50%;
   padding-top: 5vh;
 }
 </style>

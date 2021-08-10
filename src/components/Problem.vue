@@ -45,6 +45,7 @@ export default {
 <style scoped>
 .base{
   font-size: calc(2vw + 1vh + 1vmin);
+  padding: 1vw;
 }
 @media (max-width: 600px) {
   .base{
