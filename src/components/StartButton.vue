@@ -62,13 +62,11 @@ export default {
   text-align: center;
   width: 50vw;
   height: calc(5vh + 1vmin);
-  font-size: calc(2vw + 1vh + 1vmin);
 }
-@media (max-width: 600px) {
+@media (max-width: 768px) {
   .input{
     width: 90vw;
     height: calc(6vh + 1vmin);
-    font-size: calc(2vw + 1vh + 1vmin);
   }
 }
 </style>

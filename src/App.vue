@@ -110,6 +110,7 @@ export default {
       console.log(`Fetching score for ${this.personId} ...`);
       const res = await fetch(
         process.env.VUE_APP_API_PATH+`getStatistics?person=${this.personId}`);
+      console.log(res);
       let json = await res.json();
       this.mostRecentStats = json;
       console.log(json);
@@ -128,23 +129,36 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 5vh;
-  font-size: calc(1vw + 1vh + 1vmin);
+  margin-top: 5rem;
+  font-size: calc(1.5vw + 1vmin);
+}
+input, button{
+  font-size: calc(1.5vw + 1vmin);
 }
 
-@media (max-width: 600px) {
+@media (max-width: 700px) {
   #app{
-    font-size: calc(2vw + 1vh + 1vmin);
+    margin-top: 1rem;
+    font-size: calc(3vw + 1vmin);
   }
-  input{
-    font-size: calc(2vw + 1vh + 1vmin);
+  input, button, div{
+    font-size: calc(3vw + 1vmin);
+    padding: 0.1rem;
   }
 }
 
 .pTable {
-  position: absolute;
-  width: 50%;
-  left: 25%;
-  padding-top: 5vh;
+  width: 60%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+@media (max-width: 768px) {
+  .pTable {
+    width: 100%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
 </style>

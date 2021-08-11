@@ -47,12 +47,12 @@ export default {
 .base{
   text-align: center;
   width: 50vw;
-  height: calc(5vh + 1vmin);
+  height: calc(2.5rem + 1vmin);
 }
-@media (max-width: 600px) {
+@media (max-width: 700px) {
   .base{
     width: 90vw;
-    height: calc(6vh + 1vmin);
+    height: calc(2.5rem + 1vmin);
   }
 }
 </style>

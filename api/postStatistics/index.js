@@ -10,11 +10,11 @@ module.exports = async function (context, req) {
     if (req.query.person || (req.body && req.body.person)) {
         let personId = (req.query.person) || (req.body.person);
         let input = {
-            RowKey: `${personId}.${(new Date()).getTime()}`,
+            RowKey: `${personId}.${(new Date()).toDateString()}`,
+            PartitionKey: "norway",
             Timestamp: `${(new Date()).getTime()}`,
             PersonId: personId,
-            PartitionKey: "norway",
-            Result: req.query.result
+            Result: parseInt(req.query.result)
         };
         try{         
             let promise = new Promise(function(resolve, reject) {
@@ -30,6 +30,7 @@ module.exports = async function (context, req) {
                         resolve();
                     }
                     else{
+                        console.error(error);
                         context.res = {
                             status: 500
                         };

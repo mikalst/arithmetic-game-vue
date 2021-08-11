@@ -16,6 +16,7 @@ module.exports = async function (context, req) {
                 comparisonDate.setDate(comparisonDate.getDate() - 30);
                 var query = new azure.TableQuery()
                     .where('PersonId eq ?', personId)
+                    .and('Result gt ?', 0)
                     .and('Timestamp ge ?', comparisonDate);
                 
                 tableSvc.queryEntities(
@@ -29,13 +30,15 @@ module.exports = async function (context, req) {
                             status: 200,
                             body: result.entries
                                 .sort(row => -1*row['Timestamp']['_'])
-                                .slice(0, 5)
+                                .slice(0, 10)
                         };
                         resolve();
                     }
                     else {
+                        console.error(error);
                         context.res = {
-                            status: 204
+                            status: 500,
+                            body: "An error ocurred."
                         };
                         resolve();
                     }
