@@ -5,10 +5,9 @@
         v-model="personId"
     />
   </div>
-
   <div>
-    <Problem
-      ref="problem" />
+  <Problem
+    ref="problem" />
   </div>
   <InputNumber 
     ref="inputAnswer"
@@ -28,12 +27,13 @@
   <div>
     <StartButton @clicked="start" />
   </div>
-  <div class="pTable">
-    <Table :title="'Your recent scores'" v-show="mostRecentStats" :stats="mostRecentStats" />
+  <div class="pTable" v-show="mostRecentStats">
+    <Table ref="stats" :title="'Your recent scores'" :personId="personId" :stats="mostRecentStats" />
   </div>
 </template>
-
 <script>
+
+
 import InputNumber from './components/InputNumber.vue'
 import InputText from './components/InputText.vue'
 import Counter from './components/Counter.vue'
@@ -69,9 +69,7 @@ export default {
   methods: {
     checkAnswer: function (answer) {
       this.answer = answer;
-      console.log(this.answer);
-      console.log(this.solution);
-      console.log(this.answer == this.solution);
+      console.log(`Answer: ${this.answer}, Solution: ${this.solution}`);
       if (this.answer == this.solution) {
         this.answer="";
         this.correct++;
@@ -87,7 +85,7 @@ export default {
       console.log("Game is over.");
       if (this.personId) {
         await this.saveScore();
-        await this.fetchScore();
+        await this.$refs.stats.fetchScore(this.personId, 30);
       }
     },
     start: async function() {
@@ -105,15 +103,6 @@ export default {
         { method: 'POST' });
       console.log(res.status);
       console.log("Saved.");
-    },
-    fetchScore: async function() {
-      console.log(`Fetching score for ${this.personId} ...`);
-      const res = await fetch(
-        process.env.VUE_APP_API_PATH+`getStatistics?person=${this.personId}`);
-      console.log(res);
-      let json = await res.json();
-      this.mostRecentStats = json;
-      console.log(json);
     }
   },
   mounted: function () { 
@@ -129,7 +118,7 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 5rem;
+  margin-top: 1rem;
   font-size: calc(1.5vw + 1vmin);
 }
 input, button{
@@ -138,12 +127,10 @@ input, button{
 
 @media (max-width: 700px) {
   #app{
-    margin-top: 1rem;
     font-size: calc(3vw + 1vmin);
   }
   input, button, div{
     font-size: calc(3vw + 1vmin);
-    padding: 0.1rem;
   }
 }
 

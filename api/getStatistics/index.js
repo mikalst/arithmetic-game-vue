@@ -9,11 +9,17 @@ module.exports = async function (context, req) {
     
     if (req.query.person || (req.body && req.body.person)) {
         let personId = (req.query.person) || (req.body.person);
+        let numberOfDays = (req.query.numberofdays || (req.body && req.body.numberofdays));
         try{         
             let promise = new Promise(function(resolve, reject) {
                 // Filter out rows more than 30 days old.
                 let comparisonDate = new Date();
-                comparisonDate.setDate(comparisonDate.getDate() - 30);
+                if (numberOfDays) {
+                    comparisonDate.setDate(comparisonDate.getDate() - 30);
+                }
+                else {
+                    comparisonDate.setDate(comparisonDate.getDate() - 100);
+                }
                 var query = new azure.TableQuery()
                     .where('PersonId eq ?', personId)
                     .and('Result gt ?', 0)
