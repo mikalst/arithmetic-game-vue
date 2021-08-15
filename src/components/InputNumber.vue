@@ -6,7 +6,7 @@
         class="base"
         v-bind="value"
         v-on:keyup="updateValue($event.target.value)"
-        placeholder="Your answer..."
+        v-bind:placeholder="placeholder"
         :disabled="inputDisabled"
       >
 </template>
@@ -16,7 +16,7 @@ import { nextTick } from 'vue'
 
 export default {
   name: 'InputNumber',
-  props: ['value'],
+  props: ['value', 'placeholder'],
   data: function () {
     return {
       inputDisabled: true

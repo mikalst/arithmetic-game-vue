@@ -5,7 +5,7 @@
         id="ftext"
         class="base"
         v-model="value"
-        placeholder="Your name..."
+        v-bind:placeholder="placeholder"
         :disabled="inputDisabled"
       >
 </template>
@@ -15,6 +15,11 @@ import { nextTick } from 'vue'
 
 export default {
   name: 'InputText',
+  props: {
+    placeholder: {
+      type: String,
+    }
+  },
   data: function () {
     return {
       inputDisabled: false,

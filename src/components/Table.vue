@@ -1,6 +1,6 @@
 <template>
 <div>
-  <div v-show="fetched"> <a v-bind:href="'/stats?personId=' + personId"> Statistics </a> </div>
+  <div v-show="showLink"> <a v-bind:href="personId ? '/stats?personId=' + personId : '/stats'"> Statistics </a> </div>
   <div v-show="stats.length === 0 && fetched"> No results found </div>
   <section class="row-bars">
     
@@ -25,9 +25,16 @@ export default {
   name: 'Table',
   components: {
   },
-  props: [
-    'personId'
-  ],
+  props: {
+    personId: {
+      type: String,
+      default: ""
+    },
+    showLink: {
+      type: Boolean,
+      default: false
+    }
+  } ,
   data: () => ({
     stats: [],
     fetched: false

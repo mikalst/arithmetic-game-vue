@@ -3,6 +3,7 @@
     <InputText 
         ref="inputIdentifier"
         v-model="personId"
+        :placeholder="'Please enter your name ...'"
     />
   </div>
   <div>
@@ -14,6 +15,7 @@
     v-model="answer"
     :solution="solution"
     :inputDisabled="inputDisabled"
+    :placeholder="''"
     @inputUpdated="checkAnswer" />
   <div>
     <Counter
@@ -28,7 +30,12 @@
     <StartButton @clicked="start" />
   </div>
   <div class="pTable" v-show="mostRecentStats">
-    <Table ref="stats" :title="'Your recent scores'" :personId="personId" :stats="mostRecentStats" />
+    <Table ref="stats"
+      :title="'Your recent scores'"
+      :showLink="true"
+      :personId="personId"
+      :stats="mostRecentStats"
+    />
   </div>
 </template>
 <script>

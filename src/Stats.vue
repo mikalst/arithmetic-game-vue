@@ -3,6 +3,7 @@
         ref="inputIdentifier"
         v-model="personId"
         v-on:keyup="start"
+        :placeholder="'Please enter your name ...'"
     />
   <div class="stats">
     <Table ref="stats" :title="'Your recent scores'" :personId="personId" :stats="mostRecentStats" />
