@@ -76,7 +76,9 @@ export default {
   methods: {
     checkAnswer: function (answer) {
       this.answer = answer;
-      console.log(`Answer: ${this.answer}, Solution: ${this.solution}`);
+      if (process.env.NODE_ENV === "development") {
+        console.log(`Answer: ${this.answer}, Solution: ${this.solution}`);
+      }
       if (this.answer == this.solution) {
         this.answer="";
         this.correct++;
