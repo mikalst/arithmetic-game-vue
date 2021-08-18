@@ -35,7 +35,7 @@ jobs:
       
       - id: outputraw
         run: echo "::set-output name=output::$(terraform -chdir=terraform output -json)"
-      - run: echo "${{ steps.outputraw.output }}"
+      - run: echo "${{ steps.outputraw.output.ssapikey.value }}"
       - id: output
         run: echo "::set-output name=ssapikey::$(echo ${{ steps.outputraw.outputs.ssapikey }})"
 
