@@ -53,7 +53,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -61,33 +61,5 @@ export default {
   text-align: center;
   margin-top: 1rem;
   font-size: calc(1.5vw + 1vmin);
-}
-input, button{
-  font-size: calc(1.5vw + 1vmin);
-}
-
-@media (max-width: 700px) {
-  #app{
-    font-size: calc(3vw + 1vmin);
-  }
-  input, button, div{
-    font-size: calc(3vw + 1vmin);
-    padding: 0.1rem;
-  }
-}
-
-.pTable {
-  width: 60%;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-}
-@media (max-width: 768px) {
-  .pTable {
-    width: 100%;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-  }
 }
 </style>

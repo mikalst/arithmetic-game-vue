@@ -3,7 +3,6 @@
         ref="inputField"
         type="number"
         id="ftext"
-        class="base"
         v-bind="value"
         v-on:keyup="updateValue($event.target.value)"
         v-bind:placeholder="placeholder"
@@ -45,15 +44,4 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.base{
-  text-align: center;
-  width: 50vw;
-  height: calc(2.5rem + 1vmin);
-}
-@media (max-width: 700px) {
-  .base{
-    width: 90vw;
-    height: calc(2.5rem + 1vmin);
-  }
-}
 </style>

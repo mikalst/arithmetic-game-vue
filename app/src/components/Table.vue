@@ -1,5 +1,5 @@
 <template>
-<div>
+<div class="pTable">
   <div v-show="showLink"> <a v-bind:href="personId ? '/stats?personId=' + personId : '/stats'"> Statistics </a> </div>
   <div v-show="stats.length === 0 && fetched"> No results found </div>
   <section class="row-bars">
@@ -47,6 +47,7 @@ export default {
       let json = await res.json();
       this.stats = json.sort((a, b) => Date.parse(b.Timestamp['_']) - Date.parse(a.Timestamp['_']));
       this.fetched = true;
+      console.log(`Fetched.`)
     }
   }
 }

@@ -1,6 +1,6 @@
 terraform {
   backend "azurerm" {
-    resource_group_name = "rg-jeehaw.com"
+    resource_group_name = "rg-jeehaw"
     storage_account_name = "stterraform1337"
     container_name       = "tfstate"
     key                  = "math.jeehaw.tfstate"
@@ -24,7 +24,7 @@ provider "azurerm" {
 data "azurerm_client_config" "current" {}
 
 data "azurerm_resource_group" "rg" {
-  name = "rg-jeehaw.com"
+  name = "rg-jeehaw"
 }
 
 resource "azurerm_storage_account" "sa" {
@@ -43,13 +43,17 @@ resource "azurerm_storage_table" "satab" {
   name                 = "stats"
   storage_account_name = azurerm_storage_account.sa.name
 }
-output "sttablename" {
-  value = azurerm_storage_table.satab.name
+
+resource "azurerm_application_insights" "appi" {
+  name                = "appi-math-jeehaw"
+  location            = data.azurerm_resource_group.rg.location
+  resource_group_name = data.azurerm_resource_group.rg.name
+  application_type    = "web"
 }
 
 resource "azurerm_static_site" "ss" {
   name                = "swa-math-jeehaw"
-  resource_group_name = "rg-jeehaw.com"
+  resource_group_name = "rg-jeehaw"
   location            = "westeurope"
 }
 output "ssapikey" {

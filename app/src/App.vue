@@ -1,15 +1,11 @@
 <template class="app">
-  <div>
     <InputText 
         ref="inputIdentifier"
         v-model="personId"
         :placeholder="'Please enter your name ...'"
     />
-  </div>
-  <div>
   <Problem
     ref="problem" />
-  </div>
   <InputNumber 
     ref="inputAnswer"
     v-model="answer"
@@ -17,26 +13,21 @@
     :inputDisabled="inputDisabled"
     :placeholder="''"
     @inputUpdated="checkAnswer" />
-  <div>
-    <Counter
-      :correct="correct"/>
-  </div>
+  <Counter
+    :correct="correct"/>
   <Timer
     ref="timer"
     @activeEnded="stop"
     :remainingSeconds="remainingSeconds"
   />
-  <div>
-    <StartButton @clicked="start" />
-  </div>
-  <div class="pTable" v-show="mostRecentStats">
-    <Table ref="stats"
-      :title="'Your recent scores'"
-      :showLink="true"
-      :personId="personId"
-      :stats="mostRecentStats"
-    />
-  </div>
+  <StartButton @clicked="start" />
+  <Table ref="stats"
+    v-show="mostRecentStats"
+    :title="'Your recent scores'"
+    :showLink="true"
+    :personId="personId"
+    :stats="mostRecentStats"
+  />
 </template>
 <script>
 
@@ -125,21 +116,27 @@ export default {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
+  align-content: center;
   color: #2c3e50;
   margin-top: 1rem;
-  font-size: calc(1.5vw + 1vmin);
-}
-input, button{
-  font-size: calc(1.5vw + 1vmin);
 }
 
-@media (max-width: 700px) {
-  #app{
-    font-size: calc(3vw + 1vmin);
-  }
-  input, button, div{
-    font-size: calc(3vw + 1vmin);
+div, a{
+  text-align: center;
+  font-size: calc(1rem + 0.5vh);
+}
+
+input, button, a{
+  text-align: center;
+  width: 100%;
+  height: calc(3rem + 1vmin);
+  max-width: 50%;
+  font-size: calc(1rem + 0.5vh);
+}
+@media (max-width: 768px) {
+  input, button, a{
+    max-width: 95%;
+    
   }
 }
 
@@ -157,4 +154,39 @@ input, button{
     margin-right: auto;
   }
 }
+
+button {
+  border-radius: 5px;
+  background-color: #00e16e;
+  border: none;
+  color: #FFFFFF;
+  text-align: center;
+  transition: all 0.5s;
+  cursor: pointer;
+}
+
+button span {
+  cursor: pointer;
+  position: relative;
+  transition: 0.5s;
+}
+
+button span:after {
+  content: '\00bb';
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+button:hover span {
+  padding-right: 25px;
+}
+
+button:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+  
+
 </style>

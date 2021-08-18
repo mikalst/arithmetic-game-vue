@@ -1,5 +1,5 @@
 <template>
-    <div class="base"> Solve: {{ problem }} </div>
+    <div> Solve: {{ problem }} </div>
 </template>
 
 <script>
