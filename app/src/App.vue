@@ -139,6 +139,7 @@ export default {
 div, a{
   text-align: center;
   font-size: calc(1rem + 0.5vh);
+  padding: 0.3rem;
 }
 
 input, button, a{
