@@ -29,6 +29,7 @@ export default {
   methods: {
     updateValue: function (value) {
       console.log(value);
+      console.log(value);
       this.$emit('inputUpdated', value);
     },
     resetInput: function () {

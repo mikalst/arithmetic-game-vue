@@ -1,39 +1,38 @@
 <template class="app">
-    <InputText 
-        ref="inputIdentifier"
-        v-model="personId"
-        :placeholder="'Please enter your name ...'"
+  <div>
+    <div>
+      Username: {{ this.personId }}
+    </div>
+    <Problem
+      ref="problem" />
+    <InputNumber 
+      ref="inputAnswer"
+      v-model="answer"
+      :solution="solution"
+      :inputDisabled="inputDisabled"
+      :placeholder="''"
+      @inputUpdated="checkAnswer" />
+    <Counter
+      :correct="correct"/>
+    <Timer
+      ref="timer"
+      @activeEnded="stop"
+      :remainingSeconds="remainingSeconds"
     />
-  <Problem
-    ref="problem" />
-  <InputNumber 
-    ref="inputAnswer"
-    v-model="answer"
-    :solution="solution"
-    :inputDisabled="inputDisabled"
-    :placeholder="''"
-    @inputUpdated="checkAnswer" />
-  <Counter
-    :correct="correct"/>
-  <Timer
-    ref="timer"
-    @activeEnded="stop"
-    :remainingSeconds="remainingSeconds"
-  />
-  <StartButton @clicked="start" />
-  <Table ref="stats"
-    v-show="mostRecentStats"
-    :title="'Your recent scores'"
-    :showLink="true"
-    :personId="personId"
-    :stats="mostRecentStats"
-  />
+    <StartButton @clicked="start" />
+    <Table ref="stats"
+      v-show="mostRecentStats"
+      :title="'Your recent scores'"
+      :showLink="true"
+      :personId="personId"
+      :stats="mostRecentStats"
+    />
+  </div>
 </template>
 <script>
 
 
 import InputNumber from './components/InputNumber.vue'
-import InputText from './components/InputText.vue'
 import Counter from './components/Counter.vue'
 import Problem from './components/Problem.vue'
 import StartButton from './components/StartButton.vue'
@@ -46,7 +45,6 @@ export default {
   components: {
     Counter,
     InputNumber,
-    InputText,
     Problem,
     StartButton,
     Timer,
@@ -105,8 +103,25 @@ export default {
       console.log("Saved.");
     }
   },
-  mounted: function () { 
-  }
+  mounted: async function () { 
+    
+    const response = await fetch('/.auth/me');
+    const payload = await response.json();
+
+    if (!payload || !payload.clientPrincipal)
+    {
+      console.log("No user logged in.");
+      window.location.replace('/.auth/login/aad');
+      return;
+    }
+    // const { clientPrincipal } = payload;
+    console.log(payload);
+
+    this.personId = payload.clientPrincipal.userId;
+
+    console.log(this.personId);
+    // console.log(clientPrincipal);
+}
 }
 </script>
 
