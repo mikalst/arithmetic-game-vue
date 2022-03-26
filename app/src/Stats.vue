@@ -1,26 +1,35 @@
 <template class="stats">
-    <InputText 
-        ref="inputIdentifier"
-        v-model="personId"
-        v-on:keyup="start"
-        :placeholder="'Please enter your name ...'"
-    />
+    <nav class="navbar is-primary is-flex is-align-items-center	is-size-4">
+    <div class="navbar-menu">
+      <div class="navbar-start">
+        <a class="navbar-item" href="/">
+          Home
+        </a>
+        <a class="navbar-item" v-bind:href="personId ? '/stats?personId=' + personId : '/stats'">
+          Stats
+        </a>
+      </div>
+      <div class="navbar-end">
+        <p class="navbar-item">
+          {{ this.personId }}
+        </p>
+      </div>
+    </div>
+    </nav>
   <div class="stats">
-    <Table ref="stats" :title="'Your recent scores'" :personId="personId" :stats="mostRecentStats" />
+    <TableComponent ref="stats" :title="'Your recent scores'" :personId="personId" :stats="mostRecentStats" />
   </div>
 </template>
 
 <script>
 
-import Table from './components/Table.vue'
-import InputText from './components/InputText.vue'
+import TableComponent from './components/Table.vue'
 
 
 export default {
-  name: 'Stats',
+  name: 'StatsComponent',
   components: {
-    Table,
-    InputText
+    TableComponent,
   },
   data: function() {
     return {

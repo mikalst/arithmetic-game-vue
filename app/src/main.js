@@ -2,6 +2,8 @@ import { h, createApp } from 'vue/dist/vue.esm-bundler';
 import App from './App.vue'
 import Stats from './Stats.vue'
 
+require('@/assets/main.scss');
+
 const NotFoundComponent = { template: '<p>Page not found</p>' }
 
 const routes = [

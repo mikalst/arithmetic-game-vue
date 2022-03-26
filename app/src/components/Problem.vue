@@ -1,11 +1,11 @@
 <template>
-    <div> Solve: {{ problem }} </div>
+    <h1 class="is-size-3"> Solve: {{ problem }} </h1>
 </template>
 
 <script>
 
 export default {
-  name: 'Problem',
+  name: 'ProblemComponent',
   data: function() {
     return {
       'problem': null

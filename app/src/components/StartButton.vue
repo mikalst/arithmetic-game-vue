@@ -1,6 +1,6 @@
 <template>
   <div>
-    <button v-on:click="onClick"> 
+    <button class="button is-primary is-responsive" v-on:click="onClick"> 
       <span>Start</span>
     </button>
   </div>

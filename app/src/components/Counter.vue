@@ -6,7 +6,7 @@
 
 <script>
 export default {
-  name: 'Counter',
+  name: 'CounterComponent',
   props: ['correct']
 }
 </script>

@@ -6,7 +6,7 @@
 
 <script>
 export default {
-  name: 'Timer',
+  name: 'TimerComponent',
   data: function () {
     return {
       remainingSeconds: null,

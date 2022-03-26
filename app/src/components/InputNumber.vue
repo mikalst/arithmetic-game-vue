@@ -1,5 +1,5 @@
 <template>
-      <input 
+      <input class="is-size-2 has-text-centered"
         ref="inputField"
         type="number"
         id="ftext"

@@ -1,9 +1,24 @@
 <template class="app">
   <div>
-    <div>
-      Username: {{ this.personId }}
+    <nav class="navbar is-primary is-flex is-align-items-center	is-size-4">
+    <div class="navbar-menu">
+      <div class="navbar-start">
+        <a class="navbar-item" href="/">
+          Home
+        </a>
+        <a class="navbar-item" v-bind:href="personId ? '/stats?personId=' + personId : '/stats'">
+          Stats
+        </a>
+      </div>
+      <div class="navbar-end">
+        <p class="navbar-item">
+          {{ this.personId }}
+        </p>
+      </div>
     </div>
-    <Problem
+    </nav>
+  <div class="container is-max-desktop main">
+    <ProblemComponent
       ref="problem" />
     <InputNumber 
       ref="inputAnswer"
@@ -12,7 +27,7 @@
       :inputDisabled="inputDisabled"
       :placeholder="''"
       @inputUpdated="checkAnswer" />
-    <Counter
+    <CounterComponent
       :correct="correct"/>
     <Timer
       ref="timer"
@@ -28,13 +43,14 @@
       :stats="mostRecentStats"
     />
   </div>
+  </div>
 </template>
 <script>
 
 
 import InputNumber from './components/InputNumber.vue'
-import Counter from './components/Counter.vue'
-import Problem from './components/Problem.vue'
+import CounterComponent from './components/Counter.vue'
+import ProblemComponent from './components/Problem.vue'
 import StartButton from './components/StartButton.vue'
 import Table from './components/Table.vue'
 import Timer from './components/Timer.vue'
@@ -43,9 +59,9 @@ import Timer from './components/Timer.vue'
 export default {
   name: 'App',
   components: {
-    Counter,
+    CounterComponent,
     InputNumber,
-    Problem,
+    ProblemComponent,
     StartButton,
     Timer,
     Table
@@ -133,27 +149,11 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   align-content: center;
   color: #2c3e50;
-  margin-top: 1rem;
 }
 
-div, a{
+.main, a{
   text-align: center;
-  font-size: calc(1rem + 0.5vh);
   padding: 0.3rem;
-}
-
-input, button, a{
-  text-align: center;
-  width: 100%;
-  height: calc(3rem + 1vmin);
-  max-width: 50%;
-  font-size: calc(1rem + 0.5vh);
-}
-@media (max-width: 768px) {
-  input, button, a{
-    max-width: 95%;
-    
-  }
 }
 
 .pTable {
@@ -161,14 +161,6 @@ input, button, a{
   display: block;
   margin-left: auto;
   margin-right: auto;
-}
-@media (max-width: 768px) {
-  .pTable {
-    width: 100%;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-  }
 }
 
 button {
