@@ -1,7 +1,7 @@
 <template>
-    <div>
+    <h1 class="is-size-3">
       Correct: {{ correct }}
-    </div>
+    </h1>
 </template>
 
 <script>

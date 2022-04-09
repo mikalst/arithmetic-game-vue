@@ -1,6 +1,6 @@
 <template>
 <div class="pTable">
-  <div v-show="showLink"> <a v-bind:href="personId ? '/stats?personId=' + personId : '/stats'"> Statistics </a> </div>
+  <!-- <div v-show="showLink"> <a v-bind:href="personId ? '/stats?personId=' + personId : '/stats'"> Statistics </a> </div> -->
   <div v-show="stats.length === 0 && fetched"> No results found </div>
   <section class="row-bars">
     

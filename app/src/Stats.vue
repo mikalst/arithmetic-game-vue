@@ -1,18 +1,20 @@
 <template class="stats">
-    <nav class="navbar is-primary is-flex is-align-items-center	is-size-4">
-    <div class="navbar-menu">
-      <div class="navbar-start">
+        <nav class="navbar is-primary is-flex is-align-items-center	is-size-4">
+    <div class="navbar-brand">
         <a class="navbar-item" href="/">
           Home
         </a>
         <a class="navbar-item" v-bind:href="personId ? '/stats?personId=' + personId : '/stats'">
           Stats
         </a>
-      </div>
-      <div class="navbar-end">
         <p class="navbar-item">
           {{ this.personId }}
         </p>
+    </div>
+    <div class="navbar-menu">
+      <div class="navbar-start">
+      </div>
+      <div class="navbar-end">
       </div>
     </div>
     </nav>

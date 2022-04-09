@@ -1,23 +1,26 @@
 <template class="app">
   <div>
     <nav class="navbar is-primary is-flex is-align-items-center	is-size-4">
-    <div class="navbar-menu">
-      <div class="navbar-start">
+    <div class="navbar-brand">
         <a class="navbar-item" href="/">
           Home
         </a>
         <a class="navbar-item" v-bind:href="personId ? '/stats?personId=' + personId : '/stats'">
           Stats
         </a>
-      </div>
-      <div class="navbar-end">
         <p class="navbar-item">
           {{ this.personId }}
         </p>
+    </div>
+    <div class="navbar-menu">
+      <div class="navbar-start">
+      </div>
+      <div class="navbar-end">
       </div>
     </div>
     </nav>
   <div class="container is-max-desktop main">
+    <div class="card mt-2 pb-2">
     <ProblemComponent
       ref="problem" />
     <InputNumber 
@@ -34,7 +37,7 @@
       @activeEnded="stop"
       :remainingSeconds="remainingSeconds"
     />
-    <StartButton @clicked="start" />
+    <StartButton ref="startButton" @clicked="start" />
     <Table ref="stats"
       v-show="mostRecentStats"
       :title="'Your recent scores'"
@@ -42,6 +45,7 @@
       :personId="personId"
       :stats="mostRecentStats"
     />
+    </div>
   </div>
   </div>
 </template>
@@ -96,6 +100,7 @@ export default {
     },
     stop: async function() {
       this.$refs.inputAnswer?.setInputFieldDisabled();
+      this.$refs.startButton.setStartButtonEnabled();
       console.log("Game is over.");
       if (this.personId) {
         await this.saveScore();
@@ -107,6 +112,7 @@ export default {
       this.correct = 0;
       this.$refs.timer.start();
       this.$refs.inputAnswer?.setInputFieldActive();
+      this.$refs.startButton.setStartButtonDisabled();
       this.setNewProblem();
     },
     saveScore: async function() {
@@ -162,39 +168,4 @@ export default {
   margin-left: auto;
   margin-right: auto;
 }
-
-button {
-  border-radius: 5px;
-  background-color: #00e16e;
-  border: none;
-  color: #FFFFFF;
-  text-align: center;
-  transition: all 0.5s;
-  cursor: pointer;
-}
-
-button span {
-  cursor: pointer;
-  position: relative;
-  transition: 0.5s;
-}
-
-button span:after {
-  content: '\00bb';
-  opacity: 0;
-  top: 0;
-  right: -20px;
-  transition: 0.5s;
-}
-
-button:hover span {
-  padding-right: 25px;
-}
-
-button:hover span:after {
-  opacity: 1;
-  right: 0;
-}
-  
-
 </style>

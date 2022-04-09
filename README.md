@@ -1,26 +1,21 @@
 # math
 
-## Project setup
+## Run api
 ```
-npm install
+cd api
+func start host
 ```
 s
 
-### Compiles and hot-reloads for development
+## Run frontend 
 ```
+cd app
 npm run serve
 ```
 
-### Compiles and minifies for production
+## Run with Azure AD stub
 ```
-npm run build
+swa start http://localhost:8080 --api-location http://localhost:7071
 ```
 
-### Lints and fixes files
-```
-npm run lint
-```
-test
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+Now go to `http://localhost:4280`

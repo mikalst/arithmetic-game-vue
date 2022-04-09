@@ -1,7 +1,7 @@
 <template>
-  <div class="timer">
+  <h1 class="timer is-size-3">
     Remaining: {{ remainingSeconds }}
-  </div>
+  </h1>
 </template>
 
 <script>
