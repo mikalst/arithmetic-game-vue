@@ -1,5 +1,5 @@
 <template>
-    <h1 class="is-size-3">
+    <h1 class="is-size-4">
       Correct: {{ correct }}
     </h1>
 </template>

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div :hidden="inputDisabled">
     <button class="button is-primary is-responsive is-size-3" v-on:click="onClick" v-bind:disabled="inputDisabled"> 
       <span>Start</span>
     </button>

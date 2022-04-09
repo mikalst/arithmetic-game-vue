@@ -18,7 +18,7 @@
       </div>
     </div>
     </nav>
-  <div class="stats">
+  <div class="stats container is-max-desktop">
     <TableComponent ref="stats" :title="'Your recent scores'" :personId="personId" :stats="mostRecentStats" />
   </div>
 </template>

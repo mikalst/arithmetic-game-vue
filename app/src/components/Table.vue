@@ -1,11 +1,11 @@
 <template>
-<div class="pTable">
+<div class="pTable mt-2 has-text-centered">
   <!-- <div v-show="showLink"> <a v-bind:href="personId ? '/stats?personId=' + personId : '/stats'"> Statistics </a> </div> -->
   <div v-show="stats.length === 0 && fetched"> No results found </div>
   <section class="row-bars">
     
     <template v-for="row in stats" :key="row.RowKey">
-    <div class="scorebar" v-bind:style=
+    <div class="scorebar is-size-4" v-bind:style=
     " 
       { 
         'color': 'rgb(' +  Math.max(0, 255 - 10*parseInt(row.Result['_'])) + ',' + Math.min(255, 10*parseInt(row.Result['_'])) + ',0)'

@@ -1,5 +1,5 @@
 <template>
-  <h1 class="timer is-size-3">
+  <h1 class="timer is-size-4">
     Remaining: {{ remainingSeconds }}
   </h1>
 </template>

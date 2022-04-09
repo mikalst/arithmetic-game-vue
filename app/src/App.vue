@@ -1,14 +1,14 @@
 <template class="app">
-  <div>
+  <div class="is-flex is-flex-direction-column" style="height: 100vh">
     <nav class="navbar is-primary is-flex is-align-items-center	is-size-4">
     <div class="navbar-brand">
-        <a class="navbar-item" href="/">
+        <a class="navbar-item is-size-5" href="/">
           Home
         </a>
-        <a class="navbar-item" v-bind:href="personId ? '/stats?personId=' + personId : '/stats'">
+        <a class="navbar-item is-size-5" v-bind:href="personId ? '/stats?personId=' + personId : '/stats'">
           Stats
         </a>
-        <p class="navbar-item">
+        <p class="navbar-item is-size-5">
           {{ this.personId }}
         </p>
     </div>
@@ -19,34 +19,44 @@
       </div>
     </div>
     </nav>
-  <div class="container is-max-desktop main">
-    <div class="card mt-2 pb-2">
-    <ProblemComponent
-      ref="problem" />
-    <InputNumber 
-      ref="inputAnswer"
-      v-model="answer"
-      :solution="solution"
-      :inputDisabled="inputDisabled"
-      :placeholder="''"
-      @inputUpdated="checkAnswer" />
-    <CounterComponent
-      :correct="correct"/>
-    <Timer
-      ref="timer"
-      @activeEnded="stop"
-      :remainingSeconds="remainingSeconds"
-    />
-    <StartButton ref="startButton" @clicked="start" />
-    <Table ref="stats"
-      v-show="mostRecentStats"
-      :title="'Your recent scores'"
-      :showLink="true"
-      :personId="personId"
-      :stats="mostRecentStats"
-    />
+  <div class="container.is-fullhd is-flex is-align-items-center is-flex-direction-column my-auto">
+    <div class="block is-flex is-flex-direction-row" v-show="playing">
+      <CounterComponent class="mr-4"
+        :correct="correct"/>
+      <Timer
+        ref="timer"
+        @activeEnded="stop"
+        :remainingSeconds="remainingSeconds"
+      />
     </div>
-  </div>
+    <div class="block px-auto" style="width:100%" v-show="playing">
+      <section class="hero is-primary">
+      <div class="hero-body">
+        <div class="container is-flex is-align-items-center is-justify-content-center">
+        <ProblemComponent
+          ref="problem" />
+        <InputNumber 
+          ref="inputAnswer"
+          v-model="answer"
+          :solution="solution"
+          :inputDisabled="inputDisabled"
+          :placeholder="''"
+          @inputUpdated="checkAnswer" />
+        </div>
+      </div>
+      </section>
+    </div>
+    <div class="block" v-show="!playing">
+      <StartButton ref="startButton" @clicked="start" />
+      <Table ref="stats"
+        v-show="mostRecentStats"
+        :title="'Your recent scores'"
+        :showLink="true"
+        :personId="personId"
+        :stats="mostRecentStats"
+      />
+      </div>
+    </div>
   </div>
 </template>
 <script>
@@ -79,7 +89,8 @@ export default {
       inputDisabled: true,
       personId: null,
       mostRecentStats: [],
-      topStatsToday: []
+      topStatsToday: [],
+      playing: false
     }
   },
   methods: {
@@ -99,6 +110,7 @@ export default {
       this.$refs.inputAnswer.resetInput();
     },
     stop: async function() {
+      this.playing = false;
       this.$refs.inputAnswer?.setInputFieldDisabled();
       this.$refs.startButton.setStartButtonEnabled();
       console.log("Game is over.");
@@ -109,6 +121,7 @@ export default {
     },
     start: async function() {
       console.log("Game is starting.");
+      this.playing = true;
       this.correct = 0;
       this.$refs.timer.start();
       this.$refs.inputAnswer?.setInputFieldActive();

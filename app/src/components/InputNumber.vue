@@ -1,13 +1,15 @@
 <template>
-      <input class="is-size-2 has-text-centered p-2"
-        ref="inputField"
-        type="number"
-        id="ftext"
-        v-bind="value"
-        v-on:keyup="updateValue($event.target.value)"
-        v-bind:placeholder="placeholder"
-        :disabled="inputDisabled"
-      >
+  <div>
+    <input class="input is-small is-size-5 has-text-centered ml-4 is-info"
+      ref="inputField"
+      type="number"
+      id="ftext"
+      v-bind="value"
+      v-on:keyup="updateValue($event.target.value)"
+      v-bind:placeholder="placeholder"
+      :disabled="inputDisabled"
+    >
+  </div>
 </template>
 
 <script>

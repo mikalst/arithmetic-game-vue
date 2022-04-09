@@ -1,5 +1,5 @@
 <template>
-    <h1 class="is-size-3"> Solve: {{ problem }} </h1>
+    <h1 class="is-size-4"> {{ problem }} = </h1>
 </template>
 
 <script>
@@ -18,22 +18,22 @@ export default {
       let numB = 1+Math.ceil(Math.random()*100);
       if (operation == 0){
         let numA = 1+Math.ceil(Math.random()*100);
-        this.problem = `${numA} + ${numB}:`;
+        this.problem = `${numA} + ${numB}`;
         return numA + numB;
       }
       else if (operation == 1){
         let numA = 1+Math.ceil(Math.random()*100);
-        this.problem = `${numA + numB} - ${numB}:`;
+        this.problem = `${numA + numB} - ${numB}`;
         return numA;
       }
       else if (operation == 2){
         let numA = 1+Math.ceil(Math.random()*12);
-        this.problem = `${numA} x ${numB}:`;
+        this.problem = `${numA} x ${numB}`;
         return numA * numB;
       }
       else if (operation == 3){
         let numA = 1+Math.ceil(Math.random()*12);
-        this.problem = `${numA * numB} / ${numA}:`;
+        this.problem = `${numA * numB} / ${numA}`;
         return numB;
       }
     }
