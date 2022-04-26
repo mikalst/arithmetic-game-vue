@@ -1,6 +1,6 @@
 <template class="app">
   <div class="is-flex is-flex-direction-column" style="height: 100vh">
-    <nav class="navbar is-primary is-flex is-align-items-center	is-size-4">
+    <nav class="navbar is-primary is-flex is-align-items-center	is-size-5">
     <div class="navbar-brand">
         <a class="navbar-item is-size-5" href="/">
           Home
@@ -9,7 +9,7 @@
           Stats
         </a>
         <p class="navbar-item is-size-5">
-          {{ this.personId }}
+          {{ this.personId?.substring(0, 20) }}
         </p>
     </div>
     <div class="navbar-menu">
@@ -88,6 +88,7 @@ export default {
       remainingSeconds: null,
       inputDisabled: true,
       personId: null,
+      personDisplayName: null,
       mostRecentStats: [],
       topStatsToday: [],
       playing: false
@@ -153,6 +154,7 @@ export default {
     console.log(payload);
 
     this.personId = payload.clientPrincipal.userId;
+    this.personDisplayName = payload.clientPrincipal.userDetails;
 
     console.log(this.personId);
     // console.log(clientPrincipal);

@@ -1,5 +1,6 @@
 <template class="stats">
-        <nav class="navbar is-primary is-flex is-align-items-center	is-size-4">
+
+  <nav class="navbar is-primary is-flex is-align-items-center	is-size-5">
     <div class="navbar-brand">
         <a class="navbar-item" href="/">
           Home
