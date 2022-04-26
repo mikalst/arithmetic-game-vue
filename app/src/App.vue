@@ -9,7 +9,7 @@
           Stats
         </a>
         <p class="navbar-item is-size-5">
-          {{ this.personId?.substring(0, 20) }}
+          {{ this.personId?.substring(0, 15) }}
         </p>
     </div>
     <div class="navbar-menu">
