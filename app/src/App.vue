@@ -48,14 +48,7 @@
     </div>
     <div class="block" v-show="!playing">
       <StartButton ref="startButton" @clicked="start" />
-      <Table ref="stats"
-        v-show="mostRecentStats"
-        :title="'Your recent scores'"
-        :showLink="true"
-        :personId="personId"
-        :stats="mostRecentStats"
-      />
-      </div>
+    </div>
     </div>
   </div>
 </template>
@@ -137,6 +130,8 @@ export default {
         { method: 'POST' });
       console.log(res.status);
       console.log("Saved.");
+
+      window.location.replace(`/stats?personId=${this.personId}`);
     }
   },
   mounted: async function () { 

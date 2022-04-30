@@ -9,7 +9,7 @@
           Stats
         </a>
         <p class="navbar-item">
-          {{ this.personId }}
+          {{ this.personId?.substring(0, 15) }}
         </p>
     </div>
     <div class="navbar-menu">
@@ -19,7 +19,7 @@
       </div>
     </div>
     </nav>
-  <div class="stats container is-max-desktop">
+  <div>
     <TableComponent ref="stats" :title="'Your recent scores'" :personId="personId" :stats="mostRecentStats" />
   </div>
 </template>
@@ -59,7 +59,7 @@ export default {
     this.personId = new URLSearchParams(window.location.search).get("personId");
     if (this.personId) {
       this.$refs.stats.fetchScore(this.personId, 100);
-      this.$refs.inputIdentifier.value = this.personId;
+      // this.$refs.inputIdentifier.value = this.personId;
     }
   }
 }
