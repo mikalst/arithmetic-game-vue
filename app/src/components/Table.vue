@@ -4,7 +4,7 @@
   <div v-show="stats.length === 0 && fetched"> No results found </div>
   <section>
     <template v-for="row in stats" :key="row.RowKey">
-      <div class="is-size-4 columns is-mobile is-centered mt-4" v-bind:style=
+      <div class="is-size-4 columns is-mobile is-centered" v-bind:style=
       " 
         { 
           'color': 'rgb(' +  Math.max(0, 255 - 10*parseInt(row.Result['_'])) + ',' + Math.min(255, 10*parseInt(row.Result['_'])) + ',0)'
