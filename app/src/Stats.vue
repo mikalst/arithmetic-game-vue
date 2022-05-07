@@ -1,26 +1,27 @@
 <template class="stats">
-
-  <nav class="navbar is-primary is-flex is-align-items-center	is-size-5">
-    <div class="navbar-brand">
-        <a class="navbar-item" href="/">
-          Home
-        </a>
-        <a class="navbar-item" v-bind:href="personId ? '/stats?personId=' + personId : '/stats'">
-          Stats
-        </a>
-        <p class="navbar-item">
-          {{ this.personId?.substring(0, 15) }}
-        </p>
-    </div>
-    <div class="navbar-menu">
-      <div class="navbar-start">
-      </div>
-      <div class="navbar-end">
-      </div>
-    </div>
-    </nav>
   <div>
-    <TableComponent ref="stats" :title="'Your recent scores'" :personId="personId" :stats="mostRecentStats" />
+    <nav class="navbar is-primary is-flex is-align-items-center	is-size-5">
+      <div class="navbar-brand">
+          <a class="navbar-item" href="/">
+            Home
+          </a>
+          <a class="navbar-item" v-bind:href="personId ? '/stats?personId=' + personId : '/stats'">
+            Stats
+          </a>
+          <p class="navbar-item">
+            {{ this.personId?.substring(0, 15) }}
+          </p>
+      </div>
+      <div class="navbar-menu">
+        <div class="navbar-start">
+        </div>
+        <div class="navbar-end">
+        </div>
+      </div>
+    </nav>
+    <div>
+      <TableComponent ref="stats" :title="'Your recent scores'" :personId="personId" :stats="mostRecentStats" />
+    </div>
   </div>
 </template>
 

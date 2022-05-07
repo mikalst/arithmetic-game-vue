@@ -59,7 +59,6 @@ import InputNumber from './components/InputNumber.vue'
 import CounterComponent from './components/Counter.vue'
 import ProblemComponent from './components/Problem.vue'
 import StartButton from './components/StartButton.vue'
-import Table from './components/Table.vue'
 import Timer from './components/Timer.vue'
 
 
@@ -70,8 +69,7 @@ export default {
     InputNumber,
     ProblemComponent,
     StartButton,
-    Timer,
-    Table
+    Timer
   },
   data: function() {
     return {
