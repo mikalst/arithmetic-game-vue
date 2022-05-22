@@ -3,9 +3,9 @@
   <!-- <div v-show="showLink"> <a v-bind:href="personId ? '/stats?personId=' + personId : '/stats'"> Statistics </a> </div> -->
   <div v-show="stats.length === 0 && fetched"> No results found </div>
   <section>
-    <div class="columns is-mobile is-centered">
+    <div class="columns is-mobile is-centered" style="width:fit-content">
       <template v-for="row in stats" :key="row.RowKey">
-        <div class="column is-6" style="width:fit-content" v-bind:style=
+        <div class="column is-6" v-bind:style=
         " 
           { 
             'color': 'rgb(' +  Math.max(0, 255 - 10*parseInt(row.Result['_'])) + ',' + Math.min(255, 10*parseInt(row.Result['_'])) + ',0)'
@@ -13,7 +13,7 @@
         ">
           {{ new Date(row.Timestamp['_']).getDate() + "/" + (parseInt(new Date(row.Timestamp['_']).getMonth()) + 1) }} :
         </div>
-        <div class="column is-6" style="width:fit-content" v-bind:style=
+        <div class="column is-6" v-bind:style=
         " 
           { 
             'color': 'rgb(' +  Math.max(0, 255 - 10*parseInt(row.Result['_'])) + ',' + Math.min(255, 10*parseInt(row.Result['_'])) + ',0)'
