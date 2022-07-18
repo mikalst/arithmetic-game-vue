@@ -1,7 +1,7 @@
 <template>
-  <h1 class="timer is-size-4">
-    Remaining: {{ remainingSeconds }}
-  </h1>
+<div style="min-width: 600px">
+  <progress v-if="!(remainingMilliseconds === null)" class="progress" style="width: 100%;" v-bind:value="remainingMilliseconds" max="60000">{{ remainingMilliseconds / 1000 }} remains</progress>
+</div>
 </template>
 
 <script>
@@ -9,7 +9,7 @@ export default {
   name: 'TimerComponent',
   data: function () {
     return {
-      remainingSeconds: null,
+      remainingMilliseconds: null,
       timer: null
     }
   },
@@ -17,14 +17,14 @@ export default {
   methods: {
     start: function() {
       clearInterval(this.timer);
-      this.remainingSeconds = 60;
+      this.remainingMilliseconds = 60000;
       this.timer = setInterval((context) => {
-        context.remainingSeconds--;
-        if (context.remainingSeconds === 0) {
+        context.remainingMilliseconds = context.remainingMilliseconds - 100;
+        if (context.remainingMilliseconds === 0) {
           clearInterval(this.timer);
           this.$emit('activeEnded');
         }
-      }, 1000, this);
+      }, 100, this);
     }
   }
 }

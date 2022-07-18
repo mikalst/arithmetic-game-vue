@@ -20,13 +20,10 @@
     </div>
     </nav>
   <div class="container.is-fullhd is-flex is-align-items-center is-flex-direction-column my-auto">
-    <div class="block is-flex is-flex-direction-row" v-show="playing">
-      <CounterComponent class="mr-4"
-        :correct="correct"/>
+    <div v-show="playing">
       <Timer
         ref="timer"
         @activeEnded="stop"
-        :remainingSeconds="remainingSeconds"
       />
     </div>
     <div class="block px-auto" style="width:100%" v-show="playing">
@@ -56,7 +53,6 @@
 
 
 import InputNumber from './components/InputNumber.vue'
-import CounterComponent from './components/Counter.vue'
 import ProblemComponent from './components/Problem.vue'
 import StartButton from './components/StartButton.vue'
 import Timer from './components/Timer.vue'
@@ -65,7 +61,6 @@ import Timer from './components/Timer.vue'
 export default {
   name: 'App',
   components: {
-    CounterComponent,
     InputNumber,
     ProblemComponent,
     StartButton,
@@ -76,7 +71,6 @@ export default {
       answer: 0,
       solution: 1337,
       correct: 0,
-      remainingSeconds: null,
       inputDisabled: true,
       personId: null,
       personDisplayName: null,
