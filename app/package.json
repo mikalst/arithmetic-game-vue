@@ -10,8 +10,8 @@
   "dependencies": {
     "bulma": "^0.9.3",
     "core-js": "^3.21.1",
-    "node-sass": "^7.0.1",
-    "sass-loader": "^12.6.0",
+    "node-sass": "^9.0.0",
+    "sass-loader": "^16.0.7",
     "vue": "^3.2.31",
     "vue-router": "^4.0.14",
     "webpack": "^5.70.0"
